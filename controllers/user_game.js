@@ -111,8 +111,8 @@ module.exports = {
         );
 
         res.status(200).json({
-          status: "success",
-          message: "update data successfull",
+          status: true,
+          message: "update data successful!",
           data: user,
         });
       } else {

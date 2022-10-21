@@ -9,8 +9,21 @@ const user_game_history = require("../controllers/user_game_history");
 router.post("/auth/login", auth.login);
 
 // usergame
-router.post("/usergame", user_game.createUser);
-router.get("/usergame", user_game.getAll);
-router.put("/usergame", user_game.updateUser);
+router.post("/usergame/create", user_game.createUser);
+router.get("/usergame/get", user_game.getAll);
+router.put("/usergame/update/:id", user_game.updateUser);
+router.delete("/usergame/delete/:id", user_game.deleteUser);
+
+// userbio
+router.post("/bio/create", user_game_biodata.createBio);
+router.get("/bio/get", user_game_biodata.getAll);
+router.put("/bio/update/:id", user_game_biodata.updateBio);
+router.delete("/bio/delete/:id", user_game_biodata.deleteBio);
+
+// userhistory
+router.post("/history/create", user_game_history.createHistory);
+router.get("/history/get", user_game_history.getAll);
+router.put("/history/update/:id", user_game_history.updateHistory);
+router.delete("/history/delete/:id", user_game_history.deleteHistory);
 
 module.exports = router;

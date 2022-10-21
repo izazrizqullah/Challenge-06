@@ -3,7 +3,7 @@ const app = require("../app");
 
 describe("POST /api/auth/login", () => {
   it("Should post data", async () => {
-    const username = "arfanu15";
+    const username = "izaz23";
     const password = "admin123";
     const res = await request(app)
       .post("/api/auth/login")

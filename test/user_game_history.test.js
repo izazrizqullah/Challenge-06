@@ -1,12 +1,12 @@
 const request = require("supertest");
 const app = require("../app");
 
-describe.skip("POST /api/usergame", () => {
+describe.skip("POST /api/history", () => {
   it("Should create data", async () => {
     const username = "arfanu15";
     const password = "admin123";
     const res = await request(app)
-      .post("/api/usergame")
+      .post("/api/history")
       .send({ username, password });
     expect(res.statusCode).toBe(201);
     expect(res.body.status).toBe(true);
@@ -14,9 +14,9 @@ describe.skip("POST /api/usergame", () => {
   });
 });
 
-describe.skip("GET /api/usergame/get", () => {
+describe.skip("GET /api/history/get", () => {
   it("Should get data", async () => {
-    const res = await request(app).get("/api/usergame/get");
+    const res = await request(app).get("/api/bio/get");
     // .send({ username, password });
     expect(res.statusCode).toBe(200);
     expect(res.body.status).toBe(true);
@@ -24,12 +24,12 @@ describe.skip("GET /api/usergame/get", () => {
   });
 });
 
-describe.skip("PUT /api/usergame/update/3", () => {
+describe.skip("PUT /api/history/update/3", () => {
   it("Should update data", async () => {
     const username = "arfanu10";
     const password = "admin123";
     const res = await request(app)
-      .put("/api/usergame/update/3")
+      .put("/api/history/update/3")
       .send({ username, password });
     expect(res.statusCode).toBe(200);
     expect(res.body.status).toBe(true);
@@ -37,16 +37,14 @@ describe.skip("PUT /api/usergame/update/3", () => {
   });
 });
 
-describe.skip("DELETE /api/usergame/delete/3", () => {
+describe.skip("DELETE /api/history/delete/3", () => {
   it("Should delete data", async () => {
     // const username = "arfanu10";
     // const password = "admin123";
-    const res = await request(app).delete("/api/usergame/delete/3");
+    const res = await request(app).delete("/api/history/delete/3");
     // .send({ username, password });
     expect(res.statusCode).toBe(200);
     expect(res.body.status).toBe(true);
     expect(res.body.message).toBe("delete data successful!");
   });
 });
-
-
