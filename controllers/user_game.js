@@ -18,7 +18,7 @@ module.exports = {
 
       if (existUser) {
         return res.status(409).json({
-          status: failed,
+          status: false,
           message: "username already used!",
         });
       }
