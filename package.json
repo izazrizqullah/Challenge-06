@@ -19,7 +19,6 @@
     "pg": "^8.8.0",
     "postman-collection": "^4.1.5",
     "sequelize": "^6.24.0",
-    "superjest": "^0.1.0",
     "supertest": "^6.3.0"
   },
   "devDependencies": {

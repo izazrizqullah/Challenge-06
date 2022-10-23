@@ -6,6 +6,36 @@ const bcrypt = require("bcrypt");
 const { JWT_SIGNATURE_KEY } = process.env;
 
 module.exports = {
+  create: async (req, res, next) => {
+    try {
+      const { username, password } = req.body;
+
+      const found = await User_game.findOne({ where: { username } });
+      if (found) {
+        return res.status(400).json({
+          status: false,
+          message: "username already used!",
+          data: null,
+        });
+      }
+      const encryptedPassword = await bcrypt.hash(password, 10);
+
+      const created = await User_game.create({
+        username,
+        password: encryptedPassword,
+      });
+      return res.status(201).json({
+        status: true,
+        message: "create data successful!",
+        data: {
+          password: created.password,
+          username: created.username,
+        },
+      });
+    } catch (err) {
+      next(err);
+    }
+  },
   login: async (req, res, next) => {
     try {
       const { username, password } = req.body;
@@ -18,25 +48,26 @@ module.exports = {
 
       if (!user) {
         return res.status(400).json({
-          status: "failed",
+          status: false,
           message: "username or password doesn't match",
+          data: null,
         });
       }
 
-      const correct = await bcrypt.compare(
-        password,
-        User_game.password,
-        (err, _res) => {
-          if (err) {
-            console.log(err);
-          }
-        }
-      );
+      const correct = await bcrypt.compare(password, user.password);
+
+      if (!correct) {
+        return res.status(400).json({
+          status: false,
+          message: "username or password doesn't match",
+          data: null,
+        });
+      }
 
       payload = {
-        id: User_game.id,
-        username: User_game.username,
-        password: User_game.password,
+        id: user.id,
+        username: user.username,
+        // password: User_game.password,
       };
 
       const token = jwt.sign(payload, JWT_SIGNATURE_KEY);
@@ -50,7 +81,7 @@ module.exports = {
         },
       });
     } catch (err) {
-      console.log(err);
+      next(err);
     }
   },
 };

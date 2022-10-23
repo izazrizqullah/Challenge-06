@@ -22,6 +22,7 @@ module.exports = {
         return res.status(409).json({
           status: false,
           message: "user_id already used!",
+          data: null,
         });
       }
 
@@ -107,8 +108,8 @@ module.exports = {
         );
 
         res.status(200).json({
-          status: "success",
-          message: "update data successfull",
+          status: true,
+          message: "update data successful!",
           data: user,
         });
       } else {
